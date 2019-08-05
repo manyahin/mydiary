@@ -64,7 +64,7 @@ export default {
     },
     addNote (note) {
       this.notes.push(note)
-    } 
+    }
   }
 }
 </script>

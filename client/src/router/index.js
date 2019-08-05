@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import WritePage from '@/components/WritePage'
-import ReadPage from '@/components/ReadPage'
-import CalendarPage from '@/components/CalendarPage'
-import CalendarDayPage from '@/components/CalendarDayPage'
-import PageNotFound from '@/components/PageNotFound'
+import WritePage from '@/pages/WritePage'
+import ReadPage from '@/pages/ReadPage'
+import CalendarPage from '@/pages/CalendarPage'
+import CalendarDayPage from '@/pages/CalendarDayPage'
+import NotePage from '@/pages/NotePage'
+import PageNotFound from '@/pages/PageNotFound'
+
 import Login from '@/components/Login'
 
 import { store } from '@/store'
@@ -52,6 +54,12 @@ const router = new Router({
       name: 'calendarDay',
       component: CalendarDayPage,
       meta: { requiresAuth: true }
+    },
+    {
+      path: '/note/:id',
+      name: 'note',
+      component: NotePage,
+      math: { requiresAuth: true }
     },
     {
       path: '*',

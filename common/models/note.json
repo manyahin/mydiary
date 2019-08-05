@@ -17,6 +17,10 @@
     "favorite": {
       "type": "boolean",
       "default": false
+    },
+    "comments": {
+      "type": "array",
+      "default": []
     }
   },
   "validations": [],

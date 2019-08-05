@@ -47,11 +47,22 @@ npm run prod
 
 ### Update
 
+#### Master
+
 ```bash
 git pull origin master
 sudo docker-compose build
 sudo docker rm -f mydiary_web_1
 sudo npm run prod
+```
+
+#### Stage
+
+```
+git pull origin stage
+docker-compose -f stage.yml build
+docker rm -f mydiary_stage_web_1
+npm run stage
 ```
 
 # Backup
