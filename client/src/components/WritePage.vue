@@ -18,6 +18,18 @@
             <button class="pure-button" :disabled="loading" type="submit">Write</button>
           </div>
         </div>
+        <div class="pure-g post-date">
+          <div class="pure-u-1-1">
+            <span>Post date:</span>
+            <date-picker type="datetime" :show-time-panel="showTimePanel" first-day-of-week="1" width="150" v-model="postDate" lang="en">
+              <template v-slot:footer>
+                <button class="mx-btn mx-btn-text" @click="toggleTimePanel">
+                  {{ showTimePanel ? 'select date' : 'select time' }}
+                </button>
+              </template>
+            </date-picker>
+          </div>
+        </div>
       </fieldset>
     </form>
     <infinite-notes-list order="desc" :key="lastUpdate"></infinite-notes-list>
@@ -28,16 +40,22 @@
 import NoteService from '@/services/NoteService'
 import InfiniteNotesList from '@/components/InfiniteNotesList'
 
+import DatePicker from 'vue2-datepicker'
+import 'vue2-datepicker/index.css'
+
 export default {
   components: {
-    InfiniteNotesList
+    InfiniteNotesList,
+    DatePicker
   },
   data () {
     return {
       body: '',
       message: '',
       loading: false,
-      lastUpdate: 0
+      lastUpdate: 0,
+      postDate: undefined,
+      showTimePanel: false
     }
   },
   methods: {
@@ -52,7 +70,7 @@ export default {
       }
 
       let note = {}
-      note.created_at = new Date()
+      note.created_at = this.postDate || new Date()
       note.body = this.body
 
       NoteService.addNote(note)
@@ -71,6 +89,9 @@ export default {
       if (ctrlKey || metaKey) {
         this.saveNote()
       }
+    },
+    toggleTimePanel() {
+      this.showTimePanel = !this.showTimePanel;
     }
   }
 }
@@ -109,5 +130,9 @@ export default {
   .message {
     font-size: 15px;
     margin-top: 15px;
+  }
+  .post-date {
+    margin-top: 10px;
+    text-align: right;
   }
 </style>

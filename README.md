@@ -2,12 +2,19 @@
 
 This app alow you to simply setup your own private diary on your private server (like VPS) using Linux and Docker technology. To use with domain you need to configure web proxy server (like Nginx) on your server and setup your domain zone.
 
-Builed on top of loopback and vuejs.
+Backend builed on top of loopback.
+
+To access the diary use web ui builded on VueJS.
+Also, you can send messages to diary via Telegram bot (need to setup it before and get token, check https://core.telegram.org/bots)
 
 ## Setup
 
     # set password
     echo 'DIARY_PASSWORD=123456' > .docker-env
+    # no enable telegram bot set next variables
+    echo 'TELEGRAM_BOT_TOKEN=SDFDSF-SDFSDF-SDFDSF' >> .docker-env
+    echo 'TELEGRAM_ALLOWED_USERS=myUser' >> .docker-env
+
 
 ## Development
 

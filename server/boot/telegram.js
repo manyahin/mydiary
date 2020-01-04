@@ -2,13 +2,21 @@
 
 const Telegraf = require('telegraf')
 
-// process.env.TELEGRAM_BOT_TOKEN
-// process.env.TELEGRAM_ALLOWED_USERS
+const telegramOpts = {
+    token: process.env.TELEGRAM_BOT_TOKEN,
+    allowerUsers: process.env.TELEGRAM_ALLOWED_USERS,
+}
 
 module.exports = function(app) {
+
+    if (!telegramOpts.token) {
+        console.log('Telegeram bot is disabled, set TELEGRAM_BOT_TOKEN and TELEGRAM_ALLOWED_USERS to run it')
+        return
+    }
+
     const Note = app.models.Note
-    const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN)
-    const usersAllowed = process.env.TELEGRAM_ALLOWED_USERS ? process.env.TELEGRAM_ALLOWED_USERS.split(',') : []
+    const bot = new Telegraf(telegramOpts.token)
+    const usersAllowed = telegramOpts.allowerUsers ? telegramOpts.allowerUsers.split(',') : []
 
     // filter by users
     bot.use((ctx, next) => {
